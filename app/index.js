@@ -46,5 +46,5 @@ routing(app)
 // })
 
 app.listen(3000, () => {
-  console.log('程序启动在3000端口下')
+  console.log('程序启动在3000端口下--pm2')
 })
