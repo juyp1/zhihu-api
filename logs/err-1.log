@@ -1,0 +1,6 @@
+2019-08-03 13:57:19: { Error: queryTxt ESERVFAIL zhihu-oeg1x.mongodb.net
+    at QueryReqWrap.onresolve [as oncomplete] (dns.js:196:19)
+  errno: 'ESERVFAIL',
+  code: 'ESERVFAIL',
+  syscall: 'queryTxt',
+  hostname: 'zhihu-oeg1x.mongodb.net' }
