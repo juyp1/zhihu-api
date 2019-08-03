@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production node app/index.js",
-    "dev": "NODE_ENV=dev nodemon app/index.js"
+    "start": "NODE_ENV=production pm2 start app/index.js",
+    "dev": "NODE_ENV=dev nodemon app/index.js",
+   
   },
   "keywords": [],
   "author": "",
