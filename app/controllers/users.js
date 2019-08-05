@@ -1,13 +1,16 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/users')
 const { jwtsecrt } = require('../config/config')
+// const redis = require('../config/redis')
 class UsersCtl {
   async index(ctx) {
     let user = ctx.state.user
     ctx.body = await User.find()
   }
   async findbyId(ctx) {
-    ctx.body = await User.findById(ctx.params.id).populate('+following locations business educations.school ')
+    ctx.body = await User.findById(ctx.params.id).populate(
+      '+following locations business educations.school '
+    )
   }
   async checkOwner(ctx, next) {
     if (ctx.params.id !== ctx.state.user._id) {
@@ -77,7 +80,12 @@ class UsersCtl {
       ctx.throw(401, '用户或密码不存在')
     } else {
       const { _id, name } = user
+
+      // redis.set('sessionId', name)
       const token = jwt.sign({ _id, name }, jwtsecrt, { expiresIn: '1d' })
+      // redis.get('sessionId').then(function(result) {
+      //   console.log('sessionId',result)
+      // })
       ctx.body = {
         token: token
       }
@@ -95,15 +103,14 @@ class UsersCtl {
     }
   }
   // 检查用户是否存在
-  async checkUserExist(ctx,next) {
-    
+  async checkUserExist(ctx, next) {
     const user = await User.findById(ctx.params.id)
-     console.log('1111',user)
-     if(!user) {
-       ctx.throw(404,'用户不存在')
-     }else {
+    console.log('1111', user)
+    if (!user) {
+      ctx.throw(404, '用户不存在')
+    } else {
       await next()
-     }
+    }
   }
   // 关注莫个人
   async follow(ctx) {
